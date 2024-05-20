@@ -1,0 +1,395 @@
+<!-- icon.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Add this CSS to your existing styles */
+        .navbar {
+            background-color: #605f5f;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            color: rgb(0, 0, 0);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-menu li {
+            margin-right: 20px;
+        }
+
+        .navbar-menu a {
+            color: rgb(232, 229, 229);
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        body {
+            margin-top: 70px; /* Adjust the value based on your navbar height */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #f9f0ed, #f9f0ed);
+        }
+
+        /* Header styling */
+        #profileHeader {
+            background-color: #333;
+            color: rgb(6, 6, 6);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 0; /* Updated to set margin-bottom to 0 */
+        }
+
+        #profileHeader h1 {
+            margin: 0;
+        }
+
+        #profileHeader p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        #updateProfileBtn {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #000000c5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #updateProfileBtn:hover {
+            background-color: #45a049;
+        }
+
+    .icon-box {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        display: flex;
+        flex-direction: column; /* Arrange sections in a column */
+    }
+
+    .icon-section {
+        margin-bottom: 20px;
+    }
+
+    .icon-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px; /* Adjust as needed for spacing between icon containers */
+    }
+
+    .icon {
+        margin-right: 10px;
+        font-size: 24px;
+        color: #3498db;
+    }
+
+    .icon-name {
+        font-size: 18px;
+        font-weight: bold;
+        flex-grow: 1;
+        color: #333;
+    }
+
+    .add-btn {
+        cursor: pointer;
+        padding: 8px;
+        background-color: #000000c5;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .add-btn:hover {
+        background-color: #45a049;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+        /* Additional styles for the modal */
+        .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        width: 300px; /* Set a specific width */
+        max-width: 80%; /* Limit the maximum width */
+        text-align: center;
+    }
+
+    .modal-content {
+        position: relative;
+    }
+
+    .close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 20px;
+        cursor: pointer;
+        color: #555;
+    }
+
+    #modalIconClass {
+        margin-bottom: 15px;
+        font-size: 36px;
+        color: #3498db;
+    }
+
+    #modalIcon {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    #modalLabel {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    #userId {
+        margin-bottom: 15px; /* Add space between label and input field */
+        padding: 8px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #submitModal {
+        padding: 8px;
+        background-color: #060606;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #submitModal:hover {
+        background-color: #060606;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+
+<body>
+        <!-- Navbar Section -->
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="#">Your Logo</a>
+                </div>
+                <ul class="navbar-menu">
+                    <li><a href="#">Profile: {{ user.name }}</a></li>
+                </ul>
+            </div>
+            <!-- <button type="button" id="updateProfileBtn">Update</button> -->
+
+        </nav>
+    
+        <!-- Profile Header Section
+        <div id="profileHeader">
+            <h1 style="text-align:center;">Profile</h1>
+            <p>Name: {{ user.name }}</p>
+            <button type="button" id="updateProfileBtn">Update</button>
+        </div> -->
+    
+    
+    <div class="icon-box">
+        <h1 style="text-align:center;">Social media</h1>
+        <div class="icon-container">
+            <span class="icon"><i class="fab fa-instagram"></i></span>
+            <span class="icon-name">Instagram</span>
+            <button type="button" class="add-btn" data-icon-name="Instagram" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+
+        <div class="icon-container">
+            <span class="icon"><i class="fab fa-facebook"></i></span>
+            <span class="icon-name">Facebook</span>
+            <button type="button" class="add-btn" data-icon-name="Facebook" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+        
+        <div class="icon-container">
+            <span class="icon"><i class="fab fa-twitter"></i></span>
+            <span class="icon-name">Twitter</span>
+            <button type="button" class="add-btn" data-icon-name="Twitter" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+
+        <div class="icon-container">
+            <span class="icon"><i class="fab fa-linkedin"></i></span>
+            <span class="icon-name">LinkedIn</span>
+            <button type="button" class="add-btn" data-icon-name="LinkedIn" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+
+        <div class="icon-container">
+            <span class="icon"><i class="fab fa-youtube"></i></span>
+            <span class="icon-name">YouTube</span>
+            <button type="button" class="add-btn" data-icon-name="YouTube" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+
+        <!-- Contact Info Section -->
+        <h1 class="section-title">Contact Info</h1>
+
+        <div class="icon-container">
+            <span class="icon"><i class="fab fa-whatsapp"></i></span>
+            <span class="icon-name">WhatsApp</span>
+            <button type="button" class="add-btn" data-icon-name="WhatsApp" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+
+        <div class="icon-container">
+            <span class="icon"><i class="fas fa-comment"></i></span>
+            <span class="icon-name">Message</span>
+            <button type="button" class="add-btn" data-icon-name="Message" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+
+        <div class="icon-container">
+            <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+            <span class="icon-name">Location</span>
+            <button type="button" class="add-btn" data-icon-name="Location" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+
+        <div class="icon-container">
+            <span class="icon"><i class="fab fa-skype"></i></span>
+            <span class="icon-name">Skype</span>
+            <button type="button" class="add-btn" data-icon-name="Skype" data-user-id="{{ user.id }}">ADD</button>
+        </div>
+
+        
+    <button type="button" id="viewProfileBtn">View Profile</button>
+
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <span id="modalIconClass"></span>
+            <label id="modalLabel"></label>
+            <input type="text" id="social_input" name="social_input" placeholder="Enter your ID" required>
+            <button type="button" id="submitModal">Submit</button>
+        </div>
+    </div>
+
+    <form id="user-form" action="{{ url_for('store_data') }}" method="post">
+        <!-- Your other form fields go here -->
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $(".add-btn").click(function (event) {
+                event.preventDefault();
+
+                var iconName = $(this).data("icon-name");
+                var userId = $(this).data("user-id");
+
+                // Clear the modal content when opening
+                $("#social_input").val("");
+
+                // Show the modal
+                $("#myModal").show();
+
+                // Set the label in the modal based on the selected icon
+                $("#modalLabel").text("Enter your " + iconName + " ID:");
+
+                // Update the icon image in the modal
+                $("#modalIconClass").html('<i class="fab fa-' + iconName + '"></i>');
+
+                // Unbind previous click event to avoid multiple bindings
+                $("#submitModal").off("click");
+
+                // Handle form submission
+                $("#submitModal").click(function () {
+                    // Get the entered ID
+                    var socialInput = $("#social_input").val();
+
+                    // Send a request to your Flask route to store the data
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url_for('store_data') }}",
+                        data: { userId: userId, socialInput: socialInput, socialType: iconName },
+                        success: function (response) {
+                            // Display a success message
+                            alert("Data stored successfully!");
+
+                            // Close the modal
+                            $("#myModal").hide();
+                        },
+                        error: function (error) {
+                            // Handle error if needed
+                            console.error(error);
+                        }
+                    });
+                });
+            });
+
+            // Add functionality to close the modal
+            $("#closeModal").click(function () {
+                // Hide the modal
+                $("#myModal").hide();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#viewProfileBtn").click(function () {
+                // Redirect to the 'index' route
+                window.location.href = "{{ url_for('index', user_id=user.id) }}";
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <title>Home - NFC card</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href=" {{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
+        
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" href=" {{ url_for('static', filename='assets/css/fontawesome.css') }}">
+        <link rel="stylesheet" href=" {{ url_for('static', filename='assets/css/templatemo-digimedia-v3.css') }}">
+        <link rel="stylesheet" href=" {{ url_for('static', filename='assets/css/animated.css') }}">
+        <link rel="stylesheet" href=" {{ url_for('static', filename='assets/css/owl.css') }} ">
+        <style>
+        /* Add this style to align the checkbox to the left */
+        .whatsapp-checkbox {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Add this style to ensure the label is on the same line as the checkbox */
+        .whatsapp-checkbox label {
+            margin-left: 5px;
+        }  
+        </style>
+    </head>
+
+    <body>
+        <div id="contact" class="contact-us section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                            <h4>Built your <em>profile</em></h4>
+                            <div class="line-dec"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.25s">
+                        <form id="contact"  form action="{{ url_for('create_user') }}" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="fill-form">
+                                        <table style="width:100%">
+                                            <tr>
+                                            <th>Name :</th>
+                                            <td><input type="text" name="name" placeholder="your full name"></td>
+                                            </tr>
+                                            <tr>
+                                                <div class="mobile-section">
+                                                    <th>Mobile :</th>
+                                                    <td><input type="text" name="mobile" id="mobile" placeholder="your contact no" required></td>
+                                                    <!-- Checkbox and label on the same row -->
+                                                    <!--<div class="whatsapp-checkbox">
+                                                        <input type="checkbox" id="copyMobileToWhatsApp">
+                                                        <label for="copyMobileToWhatsApp">Same for WhatsApp?</label>
+                                                    </div>-->
+                                                </div>
+                                            </tr>
+                                        <tr>
+                                            <th>Email :</th>
+                                            <td><input type="email" name="email" placeholder="your email address" required><br></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address :</th>
+                                            <td><input type="text" name="address" placeholder="your address"><br></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bio :</th>
+                                            <td><input type="text" name="bio" pattern="^(\s*\S+\s*){1,30}$" placeholder="your Bio in 30 words"><br></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Upload Cover Photo :</th>
+                                            <td><input type="file" name="photo" accept="image/*" required><br></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Upload Profile Photo :</th>
+                                            <td><input type="file" name="profilephoto" accept="image/*" required><br></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Password :</th>
+                                            <td><input type="password" name="password" placeholder="Enter your password" required><br></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Confirm Password :</th>
+                                            <td><input type="password" name="con_password" placeholder="Enter your confirm password" required><br></td>
+                                        </tr>
+                                        </table>
+
+                                        <input class="null" type="submit" value="Register">
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <script>
+            // JavaScript code to copy mobile number to WhatsApp field
+            document.getElementById("copyMobileToWhatsApp").addEventListener("change", function() {
+                if (this.checked) {
+                    document.getElementById("whatsapp").value = document.getElementById("mobile").value;
+                } else {
+                    document.getElementById("whatsapp").value = "";
+                }
+            });
+        </script> -->
+    </body>
+</html>

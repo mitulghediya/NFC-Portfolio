@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <form action="{{ url_for('update_user', user_id=user.id) }}" method="post" enctype="multipart/form-data">
+        <h1 style="text-align:center;">Update User</h1>
+
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="{{ user.name }}" required><br>
+
+        <label for="mobile">Mobile No:</label>
+        <input type="text" name="mobile" value="{{ user.mobile }}" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="{{ user.email }}" required><br>
+
+        <label for="address">Address:</label>
+        <input type="text" name="address" value="{{ user.address }}"><br>
+
+        <label for="facebook">Facebook:</label>
+        <input type="text" name="facebook" value="{{ user.facebook }}"><br>
+
+        <label for="instagram">Instagram:</label>
+        <input type="text" name="instagram" value="{{ user.instagram }}"><br>
+
+        <p>Uploaded photo: {{ user.photo }}</p>
+        <label for="photo"></label>
+        <input type="file" name="photo" id="photo" accept="image/*" onchange="updateFileName('photoLabel', this)">
+        
+        <!-- Image tag -->
+        <img src="{{ url_for('static', filename=user.photo.lstrip('static/')) }}" alt="User Photo" style="height: 200px;width: 200px;">
+
+        <!-- <script>
+            // JavaScript function to update the text based on the selected file
+            function updateFileName(elementId, inputElement) {
+                var fileName = inputElement.files.length > 0 ? inputElement.files[0].name : 'No file chosen';
+                document.getElementById(elementId).innerText = 'Selected ' + fileName;
+            }
+
+            // Set initial values on page load
+            document.addEventListener("DOMContentLoaded", function() {
+                // Initialize file name display
+                updateFileName('photoLabel', document.getElementById('photo'));
+            });
+        </script> -->
+
+        <br><br>
+        <!-- Display debug information for Word document -->
+        {% if user.word_doc %}
+        <p>Debug Word: {{ user.word_doc }}</p>
+        {% else %}
+        <p>No Word document uploaded</p>
+        {% endif %}
+
+        <!-- Word Document -->
+        <label for="word_doc">Word Document:</label>
+        <input type="file" name="word_doc" id="word_doc" accept=".doc, .docx" onchange="updateFileName('wordDocLabel', this)">
+        <span id="wordDocLabel">No file chosen</span><br>
+
+        <!-- Display debug information for PDF document -->
+        {% if user.pdf_doc %}
+        <p>Debug PDF: {{ user.pdf_doc }}</p>
+        {% else %}
+        <p>No PDF document uploaded</p>
+        {% endif %}
+
+        <!-- PDF Document -->
+        <label for="pdf_doc">PDF Document:</label>
+        <input type="file" name="pdf_doc" id="pdf_doc" accept=".pdf" onchange="updateFileName('pdfDocLabel', this)">
+        <span id="pdfDocLabel">No file chosen</span><br>
+
+        <script>
+            // JavaScript function to update the text based on the selected file
+            function updateFileName(elementId, inputElement) {
+                var fileName = inputElement.files.length > 0 ? inputElement.files[0].name : 'No file chosen';
+                document.getElementById(elementId).innerText = 'Selected ' + fileName;
+            }
+        
+            // Set initial values on page load
+            document.addEventListener("DOMContentLoaded", function() {
+                // Initialize file name display for Word Document
+                updateFileName('wordDocLabel', document.getElementById('word_doc'));
+        
+                // Initialize file name display for PDF Document
+                updateFileName('pdfDocLabel', document.getElementById('pdf_doc'));
+            });
+        </script>
+        
+        <input type="submit" value="Save">
+    </form>
+
+    <br>
+    <a href="{{ url_for('search_user', user_id=user.id) }}"><button type="button">Cancel</button></a>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+<!-- SEARCH USER.HTML -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="user-details">
+        <h2 style="text-align:center;">User Details</h2>
+        <p><strong>ID:</strong> {{ user.id }}</p>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Mobile No:</strong> <a href="tel:{{ user.mobile }}">{{ user.mobile }}</a></p>
+        <p>Email: <a class="email-link" href="#"
+            onclick="openGmail('{{ user.email }}', 'Your Subject', 'Dear Recipient'); return false;">{{ user.email }}</a></p>
+        <script>
+            function openGmail(email, subject, body) {
+                var gmailComposeUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(email) +
+                    '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+                // Attempt to open Gmail compose window
+                var newWindow = window.open(gmailComposeUrl, '_blank');
+
+                // If the attempt fails, fall back to the regular mailto link
+                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' +
+                        encodeURIComponent(body);
+                }
+            }
+        </script>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+        <p><strong>Facebook:</strong> <a href="https://www.facebook.com/{{ user.facebook }}" target="_blank">{{ user.facebook }}</a></p>
+        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/{{ user.instagram }}" target="_blank">{{ user.instagram }}</a></p>
+        <div class="user-photo">
+            <img src="{{ user.photo }}" alt="User Photo">
+        </div>
+        <div class="user-documents">
+            <p><strong>Word Document:</strong> <a href="{{ user.word_doc }}" download>Download Word Document</a></p>
+            <p><strong>PDF Document:</strong> <a href="{{ user.pdf_doc }}" download>Download PDF Document</a></p>
+        </div>
+        <br>
+        <a style="margin-right: 30px;" href="{{ url_for('update_user', user_id=user.id) }}"><button>Update Data</button></a>
+        <button id="copy-link-button">Copy Link</button>
+        <span id="copy-link-message" style="margin-left: 10px;"></span>
+        <br>
+        <br>
+        <a href="{{ url_for('create_user') }}"><button>Create new User</button></a>
+    </div>
+
+    <script>
+        document.getElementById('copy-link-button').addEventListener('click', function () {
+            // Create a dummy input element
+            var dummyInput = document.createElement('input');
+
+            // Set the value to the current URL
+            dummyInput.value = window.location.href;
+
+            // Append the input element to the body
+            document.body.appendChild(dummyInput);
+
+            // Select the input content
+            dummyInput.select();
+
+            // Copy the selected text
+            document.execCommand('copy');
+
+            // Remove the input element
+            document.body.removeChild(dummyInput);
+
+            // Display a message
+            document.getElementById('copy-link-message').innerText = 'Link Copied';
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <form action="{{ url_for('update_user', user_id=user.id) }}" method="post" enctype="multipart/form-data">
+        <h1 style="text-align:center;">Update User</h1>
+
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="{{ user.name }}" required><br>
+
+        <label for="mobile">Mobile No:</label>
+        <input type="text" name="mobile" value="{{ user.mobile }}" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="{{ user.email }}" required><br>
+
+        <label for="address">Address:</label>
+        <input type="text" name="address" value="{{ user.address }}"><br>
+
+        <label for="facebook">Facebook:</label>
+        <input type="text" name="facebook" value="{{ user.facebook }}"><br>
+
+        <label for="instagram">Instagram:</label>
+        <input type="text" name="instagram" value="{{ user.instagram }}"><br>
+
+        <!-- Updated photo section -->
+        <label for="photo">Photo:</label>
+        <input type="file" name="photo" id="photo" accept="image/*" onchange="updateFileName('photoLabel', this)">
+        {% if user.photo %}
+            <!-- Check if user.photo is not None before using lstrip -->
+            <img src="{{ url_for('static', filename=user.photo.lstrip('static/')) }}" alt="User Photo"
+                style="height: 200px;width: 200px;">
+        {% else %}
+            <!-- Handle the case where user.photo is None -->
+            <img src="#" alt="User Photo Placeholder" style="height: 200px;width: 200px;">
+        {% endif %}
+        
+        <!-- <script>
+            // JavaScript function to update the text based on the selected file
+            function updateFileName(elementId, inputElement) {
+                var fileName = inputElement.files.length > 0 ? inputElement.files[0].name : 'No file chosen';
+                document.getElementById(elementId).innerText = 'Selected ' + fileName;
+            }
+
+            // Set initial values on page load
+            document.addEventListener("DOMContentLoaded", function() {
+                // Initialize file name display
+                updateFileName('photoLabel', document.getElementById('photo'));
+            });
+        </script> -->
+
+        <br><br>
+        <!-- Display debug information for Word document -->
+        {% if user.word_doc %}
+        <p>Debug Word: {{ user.word_doc }}</p>
+        {% else %}
+        <p>No Word document uploaded</p>
+        {% endif %}
+
+        <!-- Word Document -->
+        <label for="word_doc">Word Document:</label>
+        <input type="file" name="word_doc" id="word_doc" accept=".doc, .docx" onchange="updateFileName('wordDocLabel', this)">
+        <span id="wordDocLabel">No file chosen</span><br>
+
+        <!-- Display debug information for PDF document -->
+        {% if user.pdf_doc %}
+        <p>Debug PDF: {{ user.pdf_doc }}</p>
+        {% else %}
+        <p>No PDF document uploaded</p>
+        {% endif %}
+
+        <!-- PDF Document -->
+        <label for="pdf_doc">PDF Document:</label>
+        <input type="file" name="pdf_doc" id="pdf_doc" accept=".pdf" onchange="updateFileName('pdfDocLabel', this)">
+        <span id="pdfDocLabel">No file chosen</span><br>
+
+        <script>
+            // JavaScript function to update the text based on the selected file
+            function updateFileName(elementId, inputElement) {
+                var fileName = inputElement.files.length > 0 ? inputElement.files[0].name : 'No file chosen';
+                document.getElementById(elementId).innerText = 'Selected ' + fileName;
+            }
+        
+            // Set initial values on page load
+            document.addEventListener("DOMContentLoaded", function() {
+                // Initialize file name display for Word Document
+                updateFileName('wordDocLabel', document.getElementById('word_doc'));
+        
+                // Initialize file name display for PDF Document
+                updateFileName('pdfDocLabel', document.getElementById('pdf_doc'));
+            });
+        </script>
+        
+        <input type="submit" value="Save">
+    </form>
+
+    <br>
+    <a href="{{ url_for('search_user', user_id=user.id) }}"><button type="button">Cancel</button></a>
+
+    <!-- Your existing JavaScript for updating file names -->
+    <script>
+        function updateFileName(elementId, inputElement) {
+            var fileName = inputElement.files.length > 0 ? inputElement.files[0].name : 'No file chosen';
+            document.getElementById(elementId).innerText = 'Selected ' + fileName;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateFileName('wordDocLabel', document.getElementById('word_doc'));
+            updateFileName('pdfDocLabel', document.getElementById('pdf_doc'));
+            updateFileName('photoLabel', document.getElementById('photo'));
+        });
+    </script>
+</body>
+
+</html>
+
+

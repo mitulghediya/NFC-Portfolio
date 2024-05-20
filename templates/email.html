@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='emailstyle.css') }}">
+    <link rel="icon" href="img/memoji.PNG" type="image.png">
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://kit.fontawesome.com/4135295df4.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>  
+    <script defer src="script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  </head>
+  <body>
+
+    <div class="container" id="swup" class="transition-fade">
+      <span class="big-circle"></span>
+      <img src="img/shape.png" class="square" alt="" />
+      <div class="form">
+        <div class="contact-info">
+          <h3 class="title">Let's get in touch</h3>
+          <p class="text">
+            Here is the WORD you want..! If you want to contact us kindly click on email or Contact Number.
+          </p>
+
+          <div class="info">
+            <div class="information">
+              <img src="{{ url_for('static', filename='img/location.png') }}" class="icon" alt="" />
+              <p>{{ user.address }}</p>
+            </div>
+            <div class="information">
+              <img src="{{ url_for('static', filename='img/email.png') }}" class="icon" alt="" />
+              <p><a style="color:#333" class="email-link" href="#"
+                onclick="openGmail('{{ user.email }}', 'Your Subject', 'Dear Recipient'); return false;">{{ user.email }}</a>
+            </p>
+            <script>
+              function openGmail(email, subject, body) {
+                  var gmailComposeUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(email) +
+                      '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  
+                  // Attempt to open Gmail compose window
+                  var newWindow = window.open(gmailComposeUrl, '_blank');
+  
+                  // If the attempt fails, fall back to the regular mailto link
+                  if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                      location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' +
+                          encodeURIComponent(body);
+                  }
+              }
+          </script>
+            </div>
+            <div class="information">
+              <img src="{{ url_for('static', filename='img/phone.png') }}" class="icon" alt="" />
+              <p><a style="color:#333" href="tel:{{ user.mobile }}">{{ user.mobile }}</a></p>
+            </div>
+          </div>
+
+          <div class="social-media">
+            <p>Connect with me :</p>
+            <div class="social-icons">
+              <a href="{{ url_for('facebook', user_id=user.id) }}">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+
+              <a href="{{ url_for('instagram', user_id=user.id) }}">
+                <i class="fab fa-instagram"></i>
+              </a>
+
+              <a href="{{ url_for('contact', user_id=user.id) }}">
+                <i class="fa-regular fa-file-pdf"></i>
+              </a>
+              
+              <a href="{{ url_for('index', user_id=user.id) }}">
+                <i class="fa-solid fa-house"></i>
+              </a>
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <span class="circle one"></span>
+          <span class="circle two"></span>
+
+          <form action="index.html" autocomplete="off">
+            <h3 class="title">Download PDF</h3>
+            <div class="input-container">
+              <img class ="imgcode" src="{{ url_for('static', filename='img/word.png') }}" alt="">
+                
+            <!-- Check if user.pdf_doc is present before displaying the link -->
+            {% if user.pdf_doc %}
+            <p><strong></strong> <a href="{{ user.word_doc }}" download><input type="button" value="Download Word Document" class="btn"/></a></p>
+            {% endif %}
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

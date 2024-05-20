@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <title>Home - NFC card</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href=" {{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
+        
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" href=" {{ url_for('static', filename='assets/css/fontawesome.css') }}">
+        <link rel="stylesheet" href=" {{ url_for('static', filename='assets/css/templatemo-digimedia-v3.css') }}">
+        <link rel="stylesheet" href=" {{ url_for('static', filename='assets/css/animated.css') }}">
+        <link rel="stylesheet" href=" {{ url_for('static', filename='assets/css/owl.css') }} ">
+    
+    </head>
+
+    <body>
+
+        <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                                <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h2>NFC card</h2>
+                                            <h6>"Welcome to our NFC-enabled world! Tap into seamless connectivity and endless possibilities with our innovative NFC card technology. Explore, connect, and experience the future today. Welcome aboard!"</h6>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="border-first-button scroll-to-section">
+                                                <a href="{{ url_for('login') }}">Get your NFC card</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="col-lg-6">
+                            <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                                <img src=" {{ url_for('static', filename='assets/images/nfctransaction.gif') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+
+
+
+
+
